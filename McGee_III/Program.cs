@@ -6,12 +6,24 @@ namespace McGee_III
 	{
 		public static void Main (string[] args)
 		{
-			Console.WriteLine ("Hello World!");
+			string input = "";
 
-			Character player = new Character ();
-			player.name = Console.ReadLine ();
-			Console.WriteLine ("{0}", player.name);
-			Console.WriteLine ("{0}", Constants.maxHealth);
+			Console.WriteLine ("+ ----------------------------------- +");
+			Console.WriteLine ("|   The Adventure of Mrs. McGee III   |");
+			Console.WriteLine ("+ ----------------------------------- +");
+			Console.WriteLine ("            ~ Press Enter ~            ");
+			Console.ReadLine ();
+
+			Console.Clear ();
+			Console.Write ("Please enter your name, adventurer.\n\n> ");
+			Character player = new Character (Console.ReadLine ());
+
+			Console.WriteLine ("\nWelcome, Mrs. {0} McGee!", player.Name);
+
+			while (input != "quit") {
+				Console.Write ("\n> ");
+				input = Console.ReadLine ().ToLower ();
+			}
 		}
 	}
 }
