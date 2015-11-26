@@ -4,12 +4,15 @@ namespace McGee_III
 {
 	public class Character
 	{
-		public string name { get; set; }
-		public int health { get; set; }
+		// Parameters
+		public string Name { get; set; }
+		public int Health { get; set; }
 
-		public Character ()
+		// Constructor
+		public Character (string name)
 		{
-			health = 1000;
+			Name = name;
+			Health = Constants.maxHealth;
 		}
 	}
 }
