@@ -57,6 +57,11 @@ namespace McGee_III
             }
         }
 
+        public static void createRoom()
+        {
+             
+        }
+
         // Print user manual
         public static void showHelp()
         {
