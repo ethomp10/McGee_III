@@ -7,7 +7,9 @@ namespace McGee_III
         public static void Main(string[] args)
         {
             Console.Title = "The Adventure of Mrs. McGee III";
+
             string input;
+            bool runGame = true;
 
             Console.WriteLine("+ ----------------------------------- +");
             Console.WriteLine("|   The Adventure of Mrs. McGee III   |");
@@ -31,7 +33,8 @@ namespace McGee_III
                 Console.WriteLine("\nVery well, enjoy your adventure, {0}!", player.Name);
             }
 
-            while (input != "quit")
+
+            while (runGame == true)
             {
                 Console.Write("\n> ");
                 input = Console.ReadLine().ToLower();
@@ -42,6 +45,9 @@ namespace McGee_III
                         break;
                     case "cmd":
                         printCommands();
+                        break;
+                    case "quit":
+                        runGame = false;
                         break;
                     default:
                         Console.WriteLine("\nI don't understand this command.");
