@@ -20,17 +20,28 @@ namespace McGee_III
 			Console.ReadLine ();
 			Console.Clear ();
 
-			Console.Write ("Please enter your name, adventurer.\n\n> ");
-			player = new Character (Console.ReadLine ()); // Get players name
-			Console.WriteLine ("\nWelcome, Mrs. {0} McGee!", player.Name);
-			Console.WriteLine ("I understand you may be a new player.");
-			Console.WriteLine ("Would you like a tutorial? (y/n)");
+			Console.WriteLine ("You awaken to complete darkness...");
+			Console.WriteLine ("In fact, it was hard to tell you were awake at first.");
+			Console.WriteLine ("How did you get here?");
+			Console.WriteLine ("You don't remember.");
+			Console.Write ("The only thing you can remember is your name...\n\n> ");
+			input = Console.ReadLine ();
+			if (input == "") {
+				Console.WriteLine ("\n... come to think of it, you can't seem to remember that either.");
+			} else {
+				Console.WriteLine ("\n... of course, Mrs. {0} McGee.", input);
+				Console.WriteLine ("That's something at least.");
+			}
+			player = new Character (input); // Get players name
+			Console.WriteLine ("Either way, you have to find your way out of here.");
+			Console.WriteLine ("\nI understand you may be a new player.");
+			Console.WriteLine ("Would you like to view a list of commands? (y/n)");
 			input = ynTrap ();
 
 			if (input == "y") {
 				showHelp ();
 			} else if (input == "n") {
-				Console.WriteLine ("\nVery well, enjoy your adventure, {0}!", player.Name);
+				Console.WriteLine ("\nVery well, good luck {0}!", player.Name);
 			}
 
 			map = makeMap ();
@@ -48,7 +59,7 @@ namespace McGee_III
 						}
 					}
 					break;
-				case "look":
+				case "sense":
 					for (int i = 0; i < 3; i++) {
 						for (int j = 0; j < 3; j++) {
 							if ((player.Xpos == j) && (player.Ypos == i))
@@ -72,7 +83,7 @@ namespace McGee_III
 					showHelp ();
 					break;
 				case "cmd":
-					printCommands ();
+					showHelp ();
 					break;
 				case "quit":
 					Console.WriteLine ("\nAre you sure you want to quit? (y/n)");
@@ -109,16 +120,6 @@ namespace McGee_III
 			return tempMap;
 		}
 
-		// Print user manual
-		public static void showHelp ()
-		{
-			Console.Clear ();
-			Console.WriteLine ("~ The Adventure of Mrs. McGee III: Official User Manual ~");
-			Console.WriteLine ("\nThroughout your adventure, you will have to control yourself by typing commands.");
-			Console.WriteLine ("Whenever an angle bracket \">\" is printed, you may enter any of the following commands:");
-			printCommands ();
-		}
-
 		// Validate (y/n) input
 		public static string ynTrap ()
 		{
@@ -143,7 +144,7 @@ namespace McGee_III
 		}
 
 		// Print list of usable commands
-		public static void printCommands ()
+		public static void showHelp ()
 		{
 			Console.WriteLine ("\nCOMMAND\t\tDESCRIPTION");
 			Console.WriteLine ();
