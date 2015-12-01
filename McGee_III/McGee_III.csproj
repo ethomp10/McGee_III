@@ -38,6 +38,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Tile.cs" />
+    <Compile Include="Floor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

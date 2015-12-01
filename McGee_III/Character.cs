@@ -10,9 +10,9 @@ namespace McGee_III
         public int Ypos;
         public int Health;
 
-        public void moveNorth()
+		public void moveNorth(int max)
         {
-            if (Ypos < 2)
+            if (Ypos < max-1)
             {
                 Ypos++;
                 Console.WriteLine("\nY:\t{0}\nX:\t{1}", Xpos, Ypos);
@@ -23,9 +23,9 @@ namespace McGee_III
             }
         }
 
-        public void moveEast()
+		public void moveEast(int max)
         {
-            if (Xpos < 2)
+            if (Xpos < max-1)
             {
                 Xpos++;
                 Console.WriteLine("\nY:\t{0}\nX:\t{1}", Xpos, Ypos);
@@ -36,7 +36,7 @@ namespace McGee_III
             }
         }
 
-        public void moveSouth()
+		public void moveSouth()
         {
             if (Ypos > 0)
             {
@@ -49,7 +49,7 @@ namespace McGee_III
             }
         }
 
-        public void moveWest()
+		public void moveWest()
         {
             if (Xpos > 0)
             {

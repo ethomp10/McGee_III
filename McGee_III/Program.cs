@@ -11,7 +11,8 @@ namespace McGee_III
 			string input;
 			bool runGame = true;
 			Character player;
-			Tile[,] map;
+			Floor start;
+			Floor current;
 			Tile local;
 
 			Console.WriteLine ("+ ----------------------------------- +");
@@ -46,22 +47,21 @@ namespace McGee_III
 				Console.WriteLine ("\nVery well, good luck {0}!", player.Name);
 			}
 
-			map = makeMap ();
+
+			// Make map
+			current = new Floor(0);
 
 			// Game loop
 			while (runGame == true) {
-				local = map [player.Xpos, player.Ypos];
-
+				local = current.Room [player.Xpos, player.Ypos];
 				Console.Write ("\n> ");
 				input = Console.ReadLine ().ToLower ();
 				switch (input) {
 				case "map": // DEBUG COMMAND
-					Console.WriteLine ();
-					for (int y = 0; y < 3; y++) {
-						for (int x = 0; x < 3; x++) {
-							Console.WriteLine (map [x, y].Descripion);
-						}
-					}
+					current.printTiles();
+					break;
+				case "down": // DEBUG COMMAND
+					current = new Floor (current.Level + 1);
 					break;
 				case "sense":
 					local.sense ();
@@ -71,11 +71,11 @@ namespace McGee_III
 					break;
 				case "north":
 				case "w":
-					player.moveNorth ();
+					player.moveNorth (current.Size);
 					break;
 				case "east":
 				case "d":
-					player.moveEast ();
+					player.moveEast (current.Size);
 					break;
 				case "south":
 				case "s":
@@ -87,10 +87,6 @@ namespace McGee_III
 					break;
 				case "help":
 					showHelp ();
-					break;
-				case "clear":
-				case "c":
-					Console.Clear ();
 					break;
 				case "quit":
 				case "q":
@@ -108,36 +104,6 @@ namespace McGee_III
 					break;
 				}
 			}
-		}
-
-		// Generate map
-		public static Tile[,] makeMap ()
-		{
-			Tile[,] tempMap = new Tile[3, 3];
-			Random rnd = new Random ();
-			int doorX = rnd.Next (1, 3);
-			int doorY = rnd.Next (1, 3);
-			Console.Write ("\nDoor X: {0}\tDoor Y:{1}\n", doorX, doorY);
-			int seed;
-			// Make
-			for (int y = 0; y < 3; y++) {
-				for (int x = 0; x < 3; x++) {
-					seed = rnd.Next (1000);
-					tempMap [x, y] = new Tile (seed, x, y);
-					if ((x == doorX) && (y == doorY)) {
-						tempMap [x, y].Type = 3;
-					}
-				}
-			}
-
-			// Print
-			for (int y = 0; y < 3; y++) {
-				for (int x = 0; x < 3; x++) {
-					Console.WriteLine (tempMap [x, y].Descripion);
-				}
-			}
-
-			return tempMap;
 		}
 
 		// Validate (y/n) input
@@ -178,7 +144,6 @@ namespace McGee_III
 			Console.WriteLine ("   west | a\tMoves your character west");
 			Console.WriteLine ("  south | s\tMoves your character south");
 			Console.WriteLine ("   east | d\tMoves your character east");
-			Console.WriteLine ("\n  clear | c\tClears the console.");
 			Console.WriteLine ("   quit | q\tExits the application");
 		}
 	}
