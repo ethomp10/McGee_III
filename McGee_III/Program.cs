@@ -11,7 +11,6 @@ namespace McGee_III
 			string input;
 			bool runGame = true;
 			Character player;
-			Floor start;
 			Floor current;
 			Tile local;
 
@@ -49,7 +48,7 @@ namespace McGee_III
 
 
 			// Make map
-			current = new Floor(0);
+			current = new Floor (0);
 
 			// Game loop
 			while (runGame == true) {
@@ -58,15 +57,17 @@ namespace McGee_III
 				input = Console.ReadLine ().ToLower ();
 				switch (input) {
 				case "map": // DEBUG COMMAND
-					current.printTiles();
+					current.printTiles ();
 					break;
 				case "down": // DEBUG COMMAND
 					current = new Floor (current.Level + 1);
+					current.printTiles ();
+					player.Xpos++;
+					player.Ypos++;
 					break;
 				case "sense":
-					local.sense ();
-					break;
 				case "e":
+					local.sense ();
 					Console.WriteLine ("\nX:\t{0}\nY:\t{1}\n{2}", player.Xpos, player.Ypos, local.Descripion);
 					break;
 				case "north":

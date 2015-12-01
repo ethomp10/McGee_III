@@ -10,8 +10,10 @@ namespace McGee_III
 		public int Level;
 		public int Size;
 
+		// DEBUG
 		public void printTiles ()
 		{
+			Console.WriteLine ();
 			for (int y = 0; y < Size; y++) {
 				for (int x = 0; x < Size; x++) {
 					Console.WriteLine (Room [x, y].Descripion);
