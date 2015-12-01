@@ -10,6 +10,7 @@ namespace McGee_III
         public int Ypos;
         public int Health;
 
+        // Movement commands
         public void moveNorth(int max)
         {
             if (Ypos < max - 1)

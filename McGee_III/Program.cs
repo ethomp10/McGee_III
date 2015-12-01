@@ -67,7 +67,7 @@ namespace McGee_III
                     case "map": // DEBUG COMMAND
                         current.printTiles();
                         break;
-                    case "down": // DEBUG COMMAND
+                    case "fall": // DEBUG COMMAND
                         current = new Floor(current.Level + 1);
                         current.printTiles();
                         player.Xpos++;
@@ -76,7 +76,6 @@ namespace McGee_III
                     case "sense":
                     case "e":
                         local.sense();
-                        Console.WriteLine("\nX:\t{0}\nY:\t{1}\n{2}", player.Xpos, player.Ypos, local.Descripion);
                         break;
                     case "north":
                     case "w":

@@ -6,9 +6,12 @@ namespace McGee_III
     {
         Random rnd = new Random();
 
+        // Properties
         public Tile[,] Room;
         public int Level;
         public int Size;
+        public bool DoorSpawn = false;
+        public bool KeySpawn = false;
 
         // DEBUG
         public void printTiles()
@@ -23,6 +26,7 @@ namespace McGee_III
             }
         }
 
+        // Constructor
         public Floor(int level)
         {
             Level = level;
@@ -32,7 +36,7 @@ namespace McGee_III
             {
                 for (int x = 0; x < Size; x++)
                 {
-                    Room[x, y] = new Tile(rnd.Next(1000), x, y);
+                    Room[x, y] = new Tile(x, y, rnd.Next(1000));
                 }
             }
         }

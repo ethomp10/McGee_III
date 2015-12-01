@@ -4,41 +4,25 @@ namespace McGee_III
 {
     public class Tile
     {
-        enum Types
-        {
-            Start,
-            Empty,
-            Key,
-            Door
-        }
-
         // Properties
         public string Descripion;
         public int Xpos;
         public int Ypos;
-        public int Type;
         public int Seed;
 
         public void sense()
         {
-            switch (Type)
-            {
-                case 0:
-                    Console.WriteLine("\nStart");
-                    break;
-                default:
-                    Console.WriteLine("\nError: Wrong type");
-                    break;
-            }
+            Console.WriteLine();
+            Console.WriteLine(Descripion);
         }
 
         // Constructor
-        public Tile(int seed, int x, int y)
+        public Tile(int x, int y, int seed)
         {
             Xpos = x;
             Ypos = y;
             Seed = seed;
-            Descripion = String.Format("Tile:\t({0},{1})\tType:\t{2}\tSeed:\t{3}", Xpos, Ypos, Type, Seed);
+            Descripion = string.Format("Tile: ({0},{1})\tSeed: {2}", Xpos, Ypos, Seed);
         }
     }
 }
