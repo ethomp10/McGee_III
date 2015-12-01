@@ -2,35 +2,39 @@
 
 namespace McGee_III
 {
-	public class Floor
-	{
-		Random rnd = new Random ();
+    public class Floor
+    {
+        Random rnd = new Random();
 
-		public Tile[,] Room;
-		public int Level;
-		public int Size;
+        public Tile[,] Room;
+        public int Level;
+        public int Size;
 
-		// DEBUG
-		public void printTiles ()
-		{
-			Console.WriteLine ();
-			for (int y = 0; y < Size; y++) {
-				for (int x = 0; x < Size; x++) {
-					Console.WriteLine (Room [x, y].Descripion);
-				}
-			}
-		}
+        // DEBUG
+        public void printTiles()
+        {
+            Console.WriteLine();
+            for (int y = 0; y < Size; y++)
+            {
+                for (int x = 0; x < Size; x++)
+                {
+                    Console.WriteLine(Room[x, y].Descripion);
+                }
+            }
+        }
 
-		public Floor (int level)
-		{
-			Level = level;
-			Size = Level * 2 + 1;
-			Room = new Tile[Size,Size];
-			for (int y = 0; y < Size; y++) {
-				for (int x = 0; x < Size; x++) {
-					Room [x, y] = new Tile (rnd.Next(1000), x, y);
-				}
-			}
-		}
-	}
+        public Floor(int level)
+        {
+            Level = level;
+            Size = Level * 2 + 1;
+            Room = new Tile[Size, Size];
+            for (int y = 0; y < Size; y++)
+            {
+                for (int x = 0; x < Size; x++)
+                {
+                    Room[x, y] = new Tile(rnd.Next(1000), x, y);
+                }
+            }
+        }
+    }
 }
