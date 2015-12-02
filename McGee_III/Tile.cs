@@ -2,27 +2,28 @@
 
 namespace McGee_III
 {
-    public class Tile
-    {
-        // Properties
-        public string Descripion;
-        public int Xpos;
-        public int Ypos;
-        public int Seed;
+	class Tile
+	{
+		// Properties
+		public string Descripion { get; set; }
+		public int Xpos { get; set; }
+		public int Ypos { get; set; }
+		public int Seed { get; set; }
 
-        public void sense()
-        {
-            Console.WriteLine();
-            Console.WriteLine(Descripion);
-        }
+		// Constructor
+		public Tile (int x, int y, int seed)
+		{
+			Xpos = x;
+			Ypos = y;
+			Seed = seed;
+			Descripion = string.Format ("Tile: ({0},{1})\tSeed: {2}", Xpos, Ypos, Seed);
+		}
 
-        // Constructor
-        public Tile(int x, int y, int seed)
-        {
-            Xpos = x;
-            Ypos = y;
-            Seed = seed;
-            Descripion = string.Format("Tile: ({0},{1})\tSeed: {2}", Xpos, Ypos, Seed);
-        }
-    }
+		// Methods
+		public void Sense ()
+		{
+			Console.WriteLine ();
+			Console.WriteLine (Descripion);
+		}
+	}
 }
