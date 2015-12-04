@@ -24,7 +24,7 @@ namespace McGee_III
 		{
 			if (Ypos < max - 1) {
 				Ypos++;
-				Console.WriteLine ("\nY:\t{0}\nX:\t{1}", Xpos, Ypos);
+				Console.WriteLine ("\nX:\t{0}\nY:\t{1}", Xpos, Ypos);
 			} else {
 				Console.WriteLine ("\nA wall blocks your path.");
 			}
@@ -34,7 +34,7 @@ namespace McGee_III
 		{
 			if (Xpos < max - 1) {
 				Xpos++;
-				Console.WriteLine ("\nY:\t{0}\nX:\t{1}", Xpos, Ypos);
+				Console.WriteLine ("\nX:\t{0}\nY:\t{1}", Xpos, Ypos);
 			} else {
 				Console.WriteLine ("\nA wall blocks your path.");
 			}
@@ -44,7 +44,7 @@ namespace McGee_III
 		{
 			if (Ypos > 0) {
 				Ypos--;
-				Console.WriteLine ("\nY:\t{0}\nX:\t{1}", Xpos, Ypos);
+				Console.WriteLine ("\nX:\t{0}\nY:\t{1}", Xpos, Ypos);
 			} else {
 				Console.WriteLine ("\nA wall blocks your path.");
 			}
@@ -54,7 +54,7 @@ namespace McGee_III
 		{
 			if (Xpos > 0) {
 				Xpos--;
-				Console.WriteLine ("\nY:\t{0}\nX:\t{1}", Xpos, Ypos);
+				Console.WriteLine ("\nX:\t{0}\nY:\t{1}", Xpos, Ypos);
 			} else {
 				Console.WriteLine ("\nA wall blocks your path.");
 			}
