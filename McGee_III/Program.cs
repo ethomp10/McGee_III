@@ -57,19 +57,30 @@ namespace McGee_III
 				Console.Write ("\n> ");
 				input = Console.ReadLine ().ToLower ();
 				switch (input) {
-				case "map": // DEBUG COMMAND
+
+				// DEBUG COMMANDS //
+				case "map":
 					current.PrintTiles ();
 					break;
-				case "fall": // DEBUG COMMAND
-					current = new Floor (current.Level + 1);
-					current.PrintTiles ();
-					player.Xpos++;
-					player.Ypos++;
+				case "fall":
+					if (player.HasItem ("key") == true) {
+						current = new Floor (current.Level + 1);
+						current.PrintTiles ();
+						player.Inventory.Remove ("key");
+						player.Xpos++;
+						player.Ypos++;
+					} else {
+						Console.WriteLine ("\nThe door is locked.");
+					}
 					break;
-				case "sense":
-				case "e":
-					local.Sense ();
+				case "add apple":
+					player.AddItem ("apple");
 					break;
+				case "add key":
+					player.AddItem ("key");
+					break;
+				// DEBUG COMMANDS //
+				
 				case "north":
 				case "w":
 					player.MoveNorth (current.Size);
@@ -86,7 +97,16 @@ namespace McGee_III
 				case "a":
 					player.MoveWest ();
 					break;
+				case "sense":
+				case "e":
+					local.Sense ();
+					break;
+				case "bag":
+				case "i":
+					player.ShowItems ();
+					break;
 				case "help":
+				case "?":
 					showHelp ();
 					break;
 				case "quit":
@@ -140,11 +160,13 @@ namespace McGee_III
 		public static void showHelp ()
 		{
 			Console.WriteLine ("\nCOMMAND | ALT\tDESCRIPTION\n");
-			Console.WriteLine ("  sense | e\tGives information on the player's surroundings");
 			Console.WriteLine ("  north | w\tMoves your character north");
 			Console.WriteLine ("   west | a\tMoves your character west");
 			Console.WriteLine ("  south | s\tMoves your character south");
 			Console.WriteLine ("   east | d\tMoves your character east");
+			Console.WriteLine ("  sense | e\tGives information on your character's surroundings");
+			Console.WriteLine ("    bag | i\tShows your character's inventory");
+			Console.WriteLine ("\n   help | ?\tShows these commands");
 			Console.WriteLine ("   quit | q\tExits the application");
 		}
 	}
