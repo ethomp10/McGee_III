@@ -16,21 +16,40 @@ namespace McGee_III
 		{
 			Level = level;
 			Size = Level * 2 + 1;
+
+			// Determine door's location
+			int doorX = rnd.Next (Size);
+			int doorY = rnd.Next (Size);
+			bool door;
+
+			// Generate floor
 			Room = new Tile[Size, Size];
 			for (int y = 0; y < Size; y++) {
 				for (int x = 0; x < Size; x++) {
-					Room [x, y] = new Tile (x, y, rnd.Next (1000));
+					if ((x == doorX) && (y == doorY)) {
+						door = true;
+					} else {
+						door = false;
+					}
+					Room [x, y] = new Tile (x, y, rnd.Next (1000), door);
 				}
 			}
 		}
 
-		// DEBUG
+		// Debug
 		public void PrintTiles ()
 		{
+			string tag;
+
 			Console.WriteLine ();
 			for (int y = 0; y < Size; y++) {
 				for (int x = 0; x < Size; x++) {
-					Console.WriteLine (Room [x, y].Descripion);
+					if (Room [x, y].IsDoor == true) {
+						tag = "[DOOR]";
+					} else {
+						tag = "[TILE]";
+					}
+					Console.WriteLine ("{0} ({1},{2})\tDescription: {3}", tag, x, y, Room [x, y].Descripion);
 				}
 			}
 		}
