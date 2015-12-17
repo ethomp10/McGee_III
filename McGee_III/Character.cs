@@ -23,51 +23,62 @@ namespace McGee_III
 		}
 
 		// Movement commands
-		public void MoveNorth (int max)
+		public bool MoveNorth (int max)
 		{
 			if (Ypos < max - 1) {
 				Ypos++;
-				Console.WriteLine ("\nX:\t{0}\nY:\t{1}", Xpos, Ypos);
+				Console.WriteLine ("\nYou take a step to the north.");
+				return true;
 			} else {
 				Console.WriteLine ("\nA wall blocks your path.");
+				return false;
 			}
 		}
 
-		public void MoveEast (int max)
+		public bool MoveEast (int max)
 		{
 			if (Xpos < max - 1) {
 				Xpos++;
-				Console.WriteLine ("\nX:\t{0}\nY:\t{1}", Xpos, Ypos);
+				Console.WriteLine ("\nYou take a step to the east.");
+				return true;
 			} else {
 				Console.WriteLine ("\nA wall blocks your path.");
+				return false;
 			}
 		}
 
-		public void MoveSouth ()
+		public bool MoveSouth ()
 		{
 			if (Ypos > 0) {
 				Ypos--;
-				Console.WriteLine ("\nX:\t{0}\nY:\t{1}", Xpos, Ypos);
+				Console.WriteLine ("\nYou take a step to the south.");
+				return true;
 			} else {
 				Console.WriteLine ("\nA wall blocks your path.");
+				return false;
 			}
 		}
 
-		public void MoveWest ()
+		public bool MoveWest ()
 		{
 			if (Xpos > 0) {
 				Xpos--;
-				Console.WriteLine ("\nX:\t{0}\nY:\t{1}", Xpos, Ypos);
+				Console.WriteLine ("\nYou take a step to the west.");
+				return true;
 			} else {
 				Console.WriteLine ("\nA wall blocks your path.");
+				return false;
 			}
 		}
 
 		// Other methods
 		public void AddItem (string item)
 		{
-			if (HasItem(item) == false) {
+			if (HasItem (item) == false) {
 				Inventory.Add (item);
+				Console.WriteLine ("\nYou found a {0}!", item);
+			} else {
+				Console.WriteLine ("\nYou already have a {0}.", item);
 			}
 		}
 

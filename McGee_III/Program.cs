@@ -16,37 +16,38 @@ namespace McGee_III
 			Tile local;
 
 			// Start
-			Console.WriteLine ("+ ----------------------------------- +");
-			Console.WriteLine ("|   The Adventure of Mrs. McGee III   |");
-			Console.WriteLine ("+ ----------------------------------- +");
-			Console.WriteLine ("            ~ Press Enter ~            ");
-			Console.ReadLine ();
-			Console.Clear ();
-
-			Console.WriteLine ("You awaken to complete darkness...");
-			Console.WriteLine ("In fact, it was hard to tell you were awake at first.");
-			Console.WriteLine ("How did you get here?");
-			Console.WriteLine ("You don't remember.");
-			Console.Write ("The only thing you can remember is your name...\n\n> ");
-			input = Console.ReadLine ();
-			if (input == "") {
-				Console.WriteLine ("\n... come to think of it, you can't seem to remember that either.");
-			} else {
-				Console.WriteLine ("\n... of course, Mrs. {0} McGee.", input);
-				Console.WriteLine ("That's something at least.");
-			}
-			player = new Character (input);
-			Console.WriteLine ("Either way, you have to find your way out of here.");
-			Console.WriteLine ("\nI understand you may be a new player.");
-			Console.WriteLine ("Would you like to view a list of commands? (y/n)");
-			input = ynTrap ();
-
-			if (input == "y") {
-				showHelp ();
-				Console.WriteLine ("\nGood luck, {0}!", player.Name);
-			} else if (input == "n") {
-				Console.WriteLine ("\nVery well, good luck {0}!", player.Name);
-			}
+//			Console.WriteLine ("+ ----------------------------------- +");
+//			Console.WriteLine ("|   The Adventure of Mrs. McGee III   |");
+//			Console.WriteLine ("+ ----------------------------------- +");
+//			Console.WriteLine ("            ~ Press Enter ~            ");
+//			Console.ReadLine ();
+//			Console.Clear ();
+//
+//			Console.WriteLine ("You awaken to complete darkness...");
+//			Console.WriteLine ("In fact, it was hard to tell you were awake at first.");
+//			Console.WriteLine ("How did you get here?");
+//			Console.WriteLine ("You don't remember.");
+//			Console.Write ("The only thing you can remember is your name...\n\n> ");
+//			input = Console.ReadLine ();
+//			if (input == "") {
+//				Console.WriteLine ("\n... come to think of it, you can't seem to remember that either.");
+//			} else {
+//				Console.WriteLine ("\n... of course, Mrs. {0} McGee.", input);
+//				Console.WriteLine ("That's something at least.");
+//			}
+//			player = new Character (input);
+			player = new Character ("Eric");
+//			Console.WriteLine ("Either way, you have to find your way out of here.");
+//			Console.WriteLine ("\nI understand you may be a new player.");
+//			Console.WriteLine ("Would you like to view a list of commands? (y/n)");
+//			input = ynTrap ();
+//
+//			if (input == "y") {
+//				showHelp ();
+//				Console.WriteLine ("\nGood luck, {0}!", player.Name);
+//			} else if (input == "n") {
+//				Console.WriteLine ("\nVery well, good luck {0}!", player.Name);
+//			}
 
 			// Make map
 			current = new Floor (0);
@@ -58,48 +59,75 @@ namespace McGee_III
 				input = Console.ReadLine ().ToLower ();
 				switch (input) {
 
-				// DEBUG COMMANDS //
+				// Debug commands
 				case "map":
 					current.PrintTiles ();
 					break;
-				case "fall":
-					if (player.HasItem ("key") == true) {
-						current = new Floor (current.Level + 1);
-						current.PrintTiles ();
-						player.Inventory.Remove ("key");
-						player.Xpos++;
-						player.Ypos++;
-					} else {
-						Console.WriteLine ("\nThe door is locked.");
-					}
-					break;
-				case "add apple":
-					player.AddItem ("apple");
+				case "add potion":
+					player.AddItem ("potion");
 					break;
 				case "add key":
 					player.AddItem ("key");
 					break;
-				// DEBUG COMMANDS //
+				case "fall":
+					current = new Floor (current.Level + 1);
+					current.PrintTiles ();
+					player.Inventory.Remove ("key");
+					player.Xpos++;
+					player.Ypos++;
+					break;
 				
+				// Player commands
 				case "north":
 				case "w":
-					player.MoveNorth (current.Size);
+					if (player.MoveNorth (current.Size) == true) {
+						local = current.Room [player.Xpos, player.Ypos];
+						local.Sense ();
+					}
 					break;
 				case "east":
 				case "d":
-					player.MoveEast (current.Size);
+					if (player.MoveEast (current.Size) == true) {
+						local = current.Room [player.Xpos, player.Ypos];
+						local.Sense ();
+					}
 					break;
 				case "south":
 				case "s":
-					player.MoveSouth ();
+					if (player.MoveSouth () == true) {
+						local = current.Room [player.Xpos, player.Ypos];
+						local.Sense ();
+					}
 					break;
 				case "west":
 				case "a":
-					player.MoveWest ();
+					if (player.MoveWest () == true) {
+						local = current.Room [player.Xpos, player.Ypos];
+						local.Sense ();
+					}
 					break;
 				case "sense":
 				case "e":
+					Console.WriteLine ();
 					local.Sense ();
+					break;
+				case "open":
+					if (local.IsDoor == true) {
+						if (player.HasItem ("key") == true) {
+							Console.WriteLine ("\nYou use the key to open the door, but it gets stuck in the lock.");
+							player.Inventory.Remove ("key");
+							Console.WriteLine ("Carefully, you slip through the hole to the floor below.");
+							Console.WriteLine ("The echo of your feet hitting the floor seems to reverberate more...");
+							Console.WriteLine ("This floor must be larger than before.");
+							current = new Floor (current.Level + 1);
+							player.Xpos++;
+							player.Ypos++;
+						} else {
+							Console.WriteLine ("\nThe door is locked.");
+						}
+					} else {
+						Console.WriteLine ("\nThere is nothing to open.");
+					}
 					break;
 				case "bag":
 				case "i":
