@@ -36,13 +36,20 @@ namespace McGee_III
 			}
 		}
 
-		// DEBUG
+		// Debug
 		public void PrintTiles ()
 		{
+			string tag;
+
 			Console.WriteLine ();
 			for (int y = 0; y < Size; y++) {
 				for (int x = 0; x < Size; x++) {
-					Console.WriteLine (Room [x, y].Descripion);
+					if (Room [x, y].IsDoor == true) {
+						tag = "[DOOR]";
+					} else {
+						tag = "[TILE]";
+					}
+					Console.WriteLine ("{0} ({1},{2})\tDescription: {3}", tag, x, y, Room [x, y].Descripion);
 				}
 			}
 		}

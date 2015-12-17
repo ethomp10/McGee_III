@@ -44,6 +44,7 @@ namespace McGee_III
 		public void Sense ()
 		{
 			Console.WriteLine (Descripion);
+			Console.WriteLine ("Position: ({0},{1})", Xpos, Ypos);
 		}
 	}
 }
